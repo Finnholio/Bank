@@ -169,7 +169,7 @@ class Main {
     //get 1st account
     System.out.println("Transfering From...");
     for (int i = 1; i <= accounts.size(); i++) { 
-      System.out.println(i + ") " + accounts.get(i-1).getAccountNumber());
+      System.out.println(i + ") " + accounts.get(i-1).getAccountNumber() + " –– " + accounts.get(i-1).getBalance() + "$");
     }
 
     int startingAccountID = scan.nextInt();
@@ -179,7 +179,7 @@ class Main {
       //get 2nd account
       System.out.println("Transfering to...");
       for (int i = 1; i <= accounts.size(); i++) { 
-        System.out.println(i + ") " + accounts.get(i-1).getAccountNumber());
+        System.out.println(i + ") " + accounts.get(i-1).getAccountNumber() + " –– " + accounts.get(i-1).getBalance() + "$");
       }
       int endAccountID = scan.nextInt();
       //make sure 2nd accounts index not out of bounds
@@ -207,7 +207,7 @@ class Main {
     //get account to deposite to
     System.out.println("Depositing to...");
     for (int i = 1; i <= accounts.size(); i++) { 
-      System.out.println(i + ") " + accounts.get(i-1).getAccountNumber());
+      System.out.println(i + ") " + accounts.get(i-1).getAccountNumber() + " –– " + accounts.get(i-1).getBalance() + "$");
     }
 
     int accountID = scan.nextInt();
@@ -238,7 +238,7 @@ class Main {
     //find account
     System.out.println("Extracting From...");
     for (int i = 1; i <= accounts.size(); i++) { 
-      System.out.println(i + ") " + accounts.get(i-1).getAccountNumber());
+      System.out.println(i + ") " + accounts.get(i-1).getAccountNumber() + " –– " + accounts.get(i-1).getBalance() + "$");
     }
 
     int accountID = scan.nextInt();
