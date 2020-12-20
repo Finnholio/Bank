@@ -6,11 +6,14 @@ class User {
   String password;
   List<Account> accounts = new ArrayList();
 
+  //main constructor
   public User(String username, String password, boolean newUser) {
+    //assign variables
     this.name = username;
     this.password = password;
     if (newUser) {
       try {
+        //change file to match variables
         File newUsersFile = new File(username + ".txt");
         if (newUsersFile.createNewFile()) {
           File usersFile = new File("users.txt");
@@ -32,16 +35,20 @@ class User {
     
   }
 
+  //empty constructor
   public User() {
     this.name = "";
     this.password = "";
   }
 
   public void createAccount(double intrestRates, double startingBalance) throws FileNotFoundException {
+    //create account
     Account newAccount = new Account(this, intrestRates, startingBalance);
+    //add it to my accounts
     this.accounts.add(newAccount);
 
-    try { 
+    //update file
+    try {  
       File file = new File(this.name + ".txt");
       FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
       BufferedWriter bw = new BufferedWriter(fw);
@@ -53,13 +60,15 @@ class User {
     }
   }
 
-  public void addAccount(Account newAccount) {
+  public void createAccountWithoutFile(Account newAccount) { 
     this.accounts.add(newAccount);
   }
 
   public void removeAccount(long accountNumber) {
+    //find account
     for (int i = 0; i < this.accounts.size(); i++){
       if (this.accounts.get(i).getAccountNumber() == accountNumber) {
+        //removes account
         this.accounts.remove(this.accounts.get(i));
         break;
       }
@@ -79,5 +88,9 @@ class User {
 
   public String getPassword(){
     return this.password;
+  }
+
+  public String toString() { 
+    return this.name;
   }
 }

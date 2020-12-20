@@ -2,18 +2,19 @@ import java.util.*;
 import java.io.*;
 
 class Account {
-  public static List<Integer> allAccountNumbers = new ArrayList();
   long accountNumber = newAccountNumber();
   User user; 
   double interestRates;
   double balance;
 
+  //main constructor
   public Account(User newUser, double newInterestRates, double startingBalance){
     user = newUser;
     interestRates = newInterestRates;
     balance = startingBalance;
   }
 
+  //constructor but you manually set account number 
   public Account(User newUser, double newInterestRates, double startingBalance, long newAccountNumber){
     user = newUser;
     interestRates = newInterestRates;
@@ -21,9 +22,19 @@ class Account {
     accountNumber = newAccountNumber;
   }
 
+  //empty constructor
+  public Account() { 
+    user = new User();
+    interestRates = 0;
+    balance = 0;
+  }
+
   public void transferMoney(Account endDestination, double amount) {
+    //check to make sure new amount is greater than 0
     if (this.balance - amount >= 0) { 
+      //check to make sure your not transfering negative money
       if (amount > 0) { 
+        //change balance
         this.extractDepositMoney(-1*amount);
         endDestination.extractDepositMoney(amount);
       }
@@ -37,7 +48,9 @@ class Account {
   }
 
   public void extractDepositMoney(double amount) {
+    //make sure new balance is greater than 0
     if (this.balance + amount > 0) { 
+      //change balance
       this.editBalance(this.balance + amount);
     }
     else {
@@ -53,18 +66,23 @@ class Account {
       BufferedWriter bw = new BufferedWriter(fw);
       Scanner scan = new Scanner(file);
 
+      //set the line we want to add (modify)
       String newLine = this.accountNumber + ", " + this.interestRates + ", " + this.balance;
-      String totalString = "";
+
       while (scan.hasNextLine()) { 
         String nextLine = scan.nextLine();
+        //check if this line is newLine
         if (nextLine.equals(newLine)) { 
+          //if so write that line in tempFile
           bw.write(this.accountNumber + ", " + this.interestRates + ", " + newBalance + "\n");
         }
         else { 
+          //else - write the original line in the file onto the temp file
           bw.write(nextLine + "\n");
         }
       }
       bw.close();
+      //make temp file into the actaul 
       tempFile.renameTo(file);
       this.balance = newBalance;
     }
@@ -75,15 +93,11 @@ class Account {
   }
 
   public static long newAccountNumber(){
+    //generate random account number
     boolean numNotFound = true;
     Random rand = new Random();
     int newAccountNumber = rand.nextInt(10000000);
-    allAccountNumbers.add(newAccountNumber);
     return newAccountNumber;
-  }
-
-  public void sleep() {
-
   }
 
   public long getAccountNumber() {
@@ -96,5 +110,9 @@ class Account {
 
   public double getBalance() { 
     return this.balance;
+  }
+
+  public double getIntrestRates() { 
+    return this.interestRates;
   }
 }
